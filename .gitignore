@@ -81,3 +81,9 @@ env/
 # Custom
 logs/
 cache/
+
+# Generated data
+data/
+
+# Sensitive configuration
+firebase-admin-sdk.json

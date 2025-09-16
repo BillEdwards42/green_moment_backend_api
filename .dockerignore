@@ -1,0 +1,47 @@
+# Git and IDE folders
+.git
+.idea
+.vscode
+.claude
+
+# Python virtual environment and cache
+.venv
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local instance data
+cache/
+logs/
+data/
+*.log
+
+# Documentation
+*.md
+*.ini
+*.yml
+*.yaml
+
+# Local development and testing
+.env
+tests/
+test_*.py
+check_*.py
+verify_*.py
+bill_training_take1.py
+full_chore_details.py
+list_all_user_data.py
+service_monitor.py
+
+# Backups and assets
+*.json
+!model_features.json
+trained_models.zip
+
+# Requirements files (already copied in Dockerfile)
+requirements*.txt
+
+# Shell scripts (if not run from within container)
+*.sh

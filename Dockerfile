@@ -1,29 +1,19 @@
-FROM python:3.11-slim
+# Use an official Python runtime as a parent image
+FROM python:3.12-slim
 
-# Set working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    postgresql-client \
-    && rm -rf /var/lib/apt/lists/*
+# Copy the requirements files
+COPY requirements.txt requirements_ml.txt ./
 
-# Copy requirements first for better caching
-COPY requirements.txt .
-
-# Install Python dependencies
+# Install dependencies from both files
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements_ml.txt
 
-# Copy application code
+# Copy the rest of the application code (respecting .dockerignore)
 COPY . .
 
-# Create non-root user
-RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
-USER appuser
-
-# Expose port
-EXPOSE 8000
-
-# Default command (can be overridden in docker-compose)
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Default command to run the API server
+# This will be overridden in the deployments for the other services
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
